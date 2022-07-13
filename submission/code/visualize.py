@@ -16,6 +16,31 @@ from astropy.io import fits
 from scipy.signal import medfilt2d
 from skimage.feature import blob_log
 
+def show_truth(seq):
+    print(seq["ID"])
+    # number of images
+    numImg = len(seq["path"])
+    print("Images: " + str(numImg))
+
+    width = 1024
+    height = 1024
+
+    # Create 3D data cube to hold data, assuming all data have
+    # array sizes of 1024x1024 pixels.
+    data_cube = np.empty((width, height, numImg))
+
+    for i in range(numImg):
+        # read image and header from FITS file
+        img, hdr = fits.getdata(seq["path"][i], header=True)
+
+        # Normalize by exposure time (a good practice for LASCO data)
+        img = np.uint8(img.astype('float64') / hdr['EXPTIME'])
+
+        if seq["images"][i] in seq["truth"]:
+            xy = seq["truth"][seq["images"][i]]
+            cv2.circle(img, (int(float(xy[0])),int(float(xy[1]))), 10, (0,0,0), 1)
+        cv2.imwrite(seq["ID"]+"_"+str(i)+".png", img)
+
 
 def explore_sequence(seq):
     print(seq["ID"])
@@ -103,7 +128,8 @@ with open(comet_filename, 'r') as f:
         seq["truth"] = truths
         if len(images)>0:
             data_set.append(seq)
-
+"""
 for s in data_set:
     explore_sequence(s)
- 
+"""
+show_truth(data_set[21])
