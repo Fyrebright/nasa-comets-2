@@ -1,21 +1,17 @@
 assert __name__ == "__main__"
 
-import sys
-import pickle
+import faulthandler;
 import os
-import math
-import random
+import sys
 from math import sqrt
-from skimage import data
-from skimage.feature import blob_dog, blob_log, blob_doh
-from skimage.color import rgb2gray
+
+import cv2
 import numpy as np
 from astropy.io import fits
-from scipy.signal import medfilt2d
 from scipy import ndimage
-import matplotlib.pyplot as plt
-import cv2
-import faulthandler; faulthandler.enable()
+from skimage.feature import blob_log
+
+faulthandler.enable()
 import multiprocessing
 import warnings
 warnings.filterwarnings("ignore")

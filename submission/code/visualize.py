@@ -6,20 +6,16 @@ assert __name__ == "__main__"
         python3 visualize.py /data/train /data/solution.csv
 """
 
-import sys
-import pickle
 import os
-import math
-import random
+import sys
 from math import sqrt
-from skimage import data
-from skimage.feature import blob_dog, blob_log, blob_doh
-from skimage.color import rgb2gray
+
+import cv2
 import numpy as np
 from astropy.io import fits
 from scipy.signal import medfilt2d
-import matplotlib.pyplot as plt
-import cv2
+from skimage.feature import blob_log
+
 
 def explore_sequence(seq):
     print(seq["ID"])

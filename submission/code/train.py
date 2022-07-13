@@ -2,8 +2,8 @@ assert __name__ == "__main__"
 
 # Performs no training, simply builds a list of sequences.
 
-import sys
 import os
+import sys
 
 folder_in = sys.argv[1]
 
